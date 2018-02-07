@@ -36,6 +36,7 @@ def pull(date, coin_name, start_index):
 
     return zip(data[0],data[1])
 
+
 if __name__ == '__main__':
     btc_date = dt.datetime(2013, 5, 30)
     sia_date = dt.datetime(2015, 10, 31)
