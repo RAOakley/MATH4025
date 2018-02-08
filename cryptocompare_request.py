@@ -9,10 +9,10 @@ import tqdm
 #STORJ: JUL 2 2017 - PRESENT
 #MAIDSAFE: MAY 2014 - PRESENT
 
-#date should be the start date for data collection
-#start_index is where the time-stamp t should 
-#coin_name should be the 3 letter coin name in the crypto database
-#   e.g. bitcoin is BTC
+# date should be the start date for data collection
+# start_index is where the time-stamp t should 
+# coin_name should be the 3 letter coin name in the crypto database
+#      e.g. bitcoin is BTC
 def pull(date, coin_name, start_index):
     data = [[],[]]
     t = 0
@@ -21,7 +21,7 @@ def pull(date, coin_name, start_index):
         data[0].append(t)
         data[1].append(0)
         t += 1
-        date += dt.timedelta(days=1)
+        start_index += dt.timedelta(days=1)
 
     while(date < dt.datetime.today()):
         day_list.append(date)
@@ -43,11 +43,13 @@ if __name__ == '__main__':
     storj_date = dt.datetime(2017, 7, 2)
     ms_date = dt.datetime(2014, 5, 30)
 
-    dates = [btc_date, sia_date, storj_date, ms_date]
-    names = ['BTC', 'SC', 'STORJ', 'MAID']
+    #dates = [btc_date, sia_date, storj_date, ms_date]
+    dates = [sia_date, storj_date, ms_date]
+    #names = ['BTC', 'SC', 'STORJ', 'MAID']
+    names = ['SC', 'STORJ', 'MAID']
     start_index = btc_date
 
-    print([btc_date <= i for i in dates])
+    [btc_date <= i for i in dates]
 
     # Change above iterables to change which coins' data are pulled down
     # column 1 of the csv file is the time (where the first date is normalized to 0)

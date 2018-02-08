@@ -9,8 +9,10 @@ class trainer:
         self.graph.as_default()
 
     def train(rate=.0001, batch_size=100, features=1):
-        self.input = tf.placeholder(shape=[batch_size, features])
+        self.input = tf.placeholder(shape=[time_step, batch_size, features])
         self.optimizer = tf.train.AdamOptimizer(training_rate=rate)
         
         lstm = tf.contrib.rnn.BasicLSTMCell(1)
 
+	for current_time in self.input:
+	    
