@@ -2,11 +2,11 @@ cryptoNames = {'STORJ','MAID'}; %SC, BTC
 inUSD = false;
 %cryptoData = {};
 
-BTCData = csvread('BTC.csv');
+BTCData = csvread('../BTC.csv');
 dataLength = length(BTCData);
 
-firstUSD = csvread([cryptoNames{1}, '.csv']);
-secondUSD = csvread([cryptoNames{2}, '.csv']);
+firstUSD = csvread(['../', cryptoNames{1}, '.csv']);
+secondUSD = csvread(['../', cryptoNames{2}, '.csv']);
 
 figure(123234);clf;hold on; title 'USD Prices'
 plot(firstUSD(:,1),firstUSD(:,2));
@@ -17,15 +17,15 @@ secondBTC = secondUSD;
 firstBTC(:,2) = firstBTC(:,2) ./ BTCData(:,2);
 secondBTC(:,2) = secondBTC(:,2) ./ BTCData(:,2);
 
-startPoint = 1570;
-firstBTC = firstBTC(startPoint:end,2);
-secondBTC = secondBTC(startPoint:end,2);
+startPoint = 1000;
+firstBTCp = firstBTC(startPoint:end,2);
+secondBTCp = secondBTC(startPoint:end,2);
 
-xData = 1:length(firstBTC);
+xData = 1:length(firstBTCp);
 
 figure(124355378);clf;hold on; title 'BTC Prices'
-plot(xData,firstBTC);
-plot(xData,secondBTC);
+plot(xData,firstBTCp);
+plot(xData,secondBTCp);
 
 
     
