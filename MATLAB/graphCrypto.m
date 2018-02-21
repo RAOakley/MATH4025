@@ -15,7 +15,15 @@ plot(secondUSD(:,1),secondUSD(:,2));
 firstBTC = firstUSD;
 secondBTC = secondUSD;
 firstBTC(:,2) = firstBTC(:,2) ./ BTCData(:,2);
+
 secondBTC(:,2) = secondBTC(:,2) ./ BTCData(:,2);
+
+for i = 2:length(BTCData(:,2))
+    secondBTC(i,3) = secondBTC(i,2) - secondBTC(i-1,2);
+end
+secondBTC(:,4) = sign(secondBTC(:,3));
+Xs = secondBTC(611:end,2);
+Ys = secondBTC(611:end,4);
 
 startPoint = 1000;
 firstBTCp = firstBTC(startPoint:end,2);
