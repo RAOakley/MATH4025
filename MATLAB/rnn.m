@@ -86,7 +86,7 @@ closedLoopPerformance = perform(net,tc,yc)
 nets = removedelay(net);
 nets.name = [net.name ' - Predict One Step Ahead'];
 view(nets)
-[xs,xis,ais,ts] = preparets(nets,X,{},T);
+[xs,xis,ais,ts] = preparets(nets,{},{},[X,T]);
 ys = nets(xs,xis,ais);
 stepAheadPerformance = perform(nets,ts,ys)
 

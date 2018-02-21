@@ -55,3 +55,6 @@ for i = 1:length(cryptoNames)
 end
 
 %}
+
+firstBTC = firstBTC(1:end,2);
+secondBTC = secondBTC(1:end,2);
