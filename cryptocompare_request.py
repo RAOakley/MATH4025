@@ -1,8 +1,30 @@
 import cryptocompare as cc
+import requests
 import datetime as dt
 import pickle
 import csv
 import tqdm
+
+# pulls the last 5.5 days (by default) of minute-by-minute price data in terms of BTC (by default)
+# the final data-point will be time-stamped to the closest minute of the request-time
+# each data point is 1 minute, and request rate is capped to:
+#   8000/hour, 300/minute, 15/second
+def min_pull(coin_name, curr='BTC', data_len=8000):
+    url_hist_price_min = 'https://min-api.cryptocompare.com/data/histominute?fsym={}&tsym={}&limit={}'.format(coin_name, curr, data_len)
+    # hist_data = cc.query_cryptocompare(url_hist_price_min)
+    # copied pasted from the cryptocompare GIT; the wrapper above doesn't work for some reason
+    try:
+        hist_data = requests.get(url_hist_price_min).json()
+    except Exception as e:
+        print('Error getting coin information. %s' % str(e))
+        return 
+    if (hist_data.get('Response') == 'Error'):
+        print('[ERROR] %s' % hist_data.get('Message'))
+        return 
+
+    formatted = [list(map(lambda x: x['time'], hist_data['Data'])), list(map(lambda x: x['open'], hist_data['Data']))]
+    
+    return formatted 
 
 #BTC: MAY 2013 - PRESENT
 #SIA: OCT 2015 - PRESENT
@@ -38,6 +60,7 @@ def pull(date, coin_name, start_index):
 
 
 if __name__ == '__main__':
+    '''
     btc_date = dt.datetime(2013, 5, 30)
     sia_date = dt.datetime(2015, 10, 31)
     storj_date = dt.datetime(2017, 7, 2)
@@ -58,3 +81,14 @@ if __name__ == '__main__':
         f = open(name + '.csv', 'w', newline='')
         csv.writer(f).writerows(pull(date, name, start_index))
         f.close()
+    '''
+
+    print(min_pull('SC', data_len=10))
+
+    '''
+    names = ['SC', 'STORJ', 'MAID']
+    for name in names:
+        f = open(name + '.csv', 'rw', newline='')
+	reader = csv.reader(f)
+	writer = csv.writer(f)
+    '''
