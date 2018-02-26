@@ -19,15 +19,22 @@ trainFcn = 'trainbr';  % Levenberg-Marquardt backpropagation.
 
 % Create a Nonlinear Autoregressive Network with External Input
 % inputDelays = 1:10;
-feedbackDelays = 1:10;
-hiddenLayerSize = 20;
+feedbackDelays = 1:14;
+hiddenLayerSize = 25;
 % net = narnet(inputDelays,feedbackDelays,hiddenLayerSize,'open',trainFcn);
-net = narnet(feedbackDelays,hiddenLayerSize, 'open', trainFcn);
+net = narnet(feedbackDelays,hiddenLayerSize, 'open', trainFcn)
+
+matlabroot = 'C:\Program Files\MATLAB\R2017b';
+copyfile([matlabroot '\toolbox\nnet\nnet\nnperformance\mse.m'], 'mymse.m');
+copyfile([matlabroot '\toolbox\nnet\nnet\nnperformance\+mse'], '+mymse');
+net.performFcn = 'mymse';
+net.trainParam.max_fail = 25;
+% net.divideFcn = 'divideint';
 
 net.layers{2}.transferFcn = 'tansig';
 l = net.layers;
 % l1 = net.layers{1};
-net.layers{1}.transferFcn = 'logsig';
+net.layers{1}.transferFcn = 'tansig';
 
 % Prepare the Data for Training and Simulation
 % The function PREPARETS prepares timeseries data for a particular network,
