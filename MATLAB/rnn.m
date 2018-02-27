@@ -15,7 +15,7 @@ T = tonndata(Ys,false,false);
 % 'trainlm' is usually fastest.
 % 'trainbr' takes longer but may be better for challenging problems.
 % 'trainscg' uses less memory. Suitable in low memory situations.
-trainFcn = 'trainbr';  % Levenberg-Marquardt backpropagation.
+trainFcn = 'trainlm';  % Levenberg-Marquardt backpropagation.
 
 % Create a Nonlinear Autoregressive Network with External Input
 % inputDelays = 1:10;
