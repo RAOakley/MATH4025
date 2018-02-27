@@ -1,7 +1,6 @@
 import cryptocompare as cc
 import requests
 import datetime as dt
-import pickle
 import csv
 import tqdm
 
