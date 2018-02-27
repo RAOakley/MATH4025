@@ -21,7 +21,8 @@ def min_pull(coin_name, curr='BTC', data_len=8000):
 		print('[ERROR] %s' % hist_data.get('Message'))
 		return 
 
-	formatted = [list(map(lambda x: x['time'], hist_data['Data'])), list(map(lambda x: x['open'], hist_data['Data']))]
+	formatted = [list(map(lambda x: x['time'], hist_data['Data'])), list(map(lambda x: x['open'], hist_data['Data'])),
+				 list(map(lambda x: x['volumefrom'], hist_data['Data'])), list(map(lambda x: x['volumeto'], hist_data['Data']))]
 	
 	return formatted 
 
