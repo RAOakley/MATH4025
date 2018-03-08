@@ -38,11 +38,11 @@ if __name__ == '__main__':
 					# create a list of tweets whose ids aren't already in the JSON
 					new_data = list(filter(lambda x: not x['id_str'] in id_list, data['statuses']))
 
-					data['statuses'].extend(new_data)
+					f_data['statuses'].extend(new_data)
 
 			except Exception as e:
 				print('Did not read from file.  Does it exist?', e)
 
 			with open(name + '.json', 'w') as f:
-				json.dump(data, f)
-				print('Data dumped to file')
+				json.dump(f_data, f)
+				print('Dumped %d lines of data to file'%len(f_data['statuses']))

@@ -2,11 +2,11 @@ cryptoNames = {'STORJ','MAID'}; %SC, BTC
 inUSD = false;
 %cryptoData = {};
 
-BTCData = csvread('../BTC.csv');
+BTCData = csvread('../BTC_daily.csv');
 dataLength = length(BTCData);
 
-firstUSD = csvread(['../', cryptoNames{1}, '.csv']);
-secondUSD = csvread(['../', cryptoNames{2}, '.csv']);
+firstUSD = csvread(['../', cryptoNames{1}, '_daily.csv']);
+secondUSD = csvread(['../', cryptoNames{2}, '_daily.csv']);
 
 figure(123234);clf;hold on; title 'USD Prices'
 plot(firstUSD(:,1),firstUSD(:,2));
