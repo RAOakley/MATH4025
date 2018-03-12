@@ -1,43 +1,47 @@
-cryptoNames = {'STORJ','MAID'}; %SC, BTC
+cryptoNames = {'STORJ','MAID','SC'}; %SC, BTC
 inUSD = false;
 %cryptoData = {};
 
 BTCData = csvread('../BTC_daily.csv');
 dataLength = length(BTCData);
+%{
+firstCoin = csvread(['../', cryptoNames{1}, '_daily.csv']);
+secondCoin = csvread(['../', cryptoNames{2}, '_daily.csv']);
+thirdCoin = csvread(['../', cryptoNames{3}, '_daily.csv']);
+%}
+firstCoin = csvread(['../', cryptoNames{1}, '.csv']);
+secondCoin = csvread(['../', cryptoNames{2}, '.csv']);
+thirdCoin = csvread(['../', cryptoNames{3}, '.csv']);
 
-firstUSD = csvread(['../', cryptoNames{1}, '_daily.csv']);
-secondUSD = csvread(['../', cryptoNames{2}, '_daily.csv']);
+figure(123234);clf;hold on; title 'Coin Prices'
+plot(firstCoin(1,:), firstCoin(2,:));
+plot(secondCoin(1,:), secondCoin(2,:));
+plot(thirdCoin(1,:), thirdCoin(2,:));
+legend(cryptoNames, 'Location', 'northwest');
 
-figure(123234);clf;hold on; title 'USD Prices'
-plot(firstUSD(:,1),firstUSD(:,2));
-plot(secondUSD(:,1),secondUSD(:,2));
 
-firstBTC = firstUSD;
-secondBTC = secondUSD;
-firstBTC(:,2) = firstBTC(:,2) ./ BTCData(:,2);
-
-secondBTC(:,2) = secondBTC(:,2) ./ BTCData(:,2);
-
-for i = 2:length(BTCData(:,2))
-    secondBTC(i,3) = secondBTC(i,2) - secondBTC(i-1,2);
+for i = 2:length(secondCoin(2,:))
+    secondCoin(5,i) = secondCoin(2,i) - secondCoin(2,i-1);
 end
-secondBTC(:,4) = sign(secondBTC(:,3));
-Xs = secondBTC(611:end,2);
-Ys = secondBTC(611:end,4);
+secondCoin(5,:) = sign(secondCoin(5,:));
+%Xs = secondCoin(3:5,:);
+%Ys = secondCoin(2,:);
+Xs = secondCoin(2:3,:);
+Ys = secondCoin(5,:);
 
+
+%{
 startPoint = 1000;
-firstBTCp = firstBTC(startPoint:end,2);
-secondBTCp = secondBTC(startPoint:end,2);
+firstBTCp = firstCoin(startPoint:end,2);
+secondBTCp = secondCoin(startPoint:end,2);
 
 xData = 1:length(firstBTCp);
 
 figure(124355378);clf;hold on; title 'BTC Prices'
 plot(xData,firstBTCp);
 plot(xData,secondBTCp);
-
-
     
-%{
+
 figure(12341234);clf;hold on;
 for i = 1:length(cryptoNames)
     figure(i);clf;
@@ -55,6 +59,3 @@ for i = 1:length(cryptoNames)
 end
 
 %}
-
-firstBTC = firstBTC(1:end,2);
-secondBTC = secondBTC(1:end,2);
