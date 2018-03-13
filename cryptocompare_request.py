@@ -2,6 +2,7 @@ import cryptocompare as cc
 import requests
 import datetime as dt
 import csv
+from itertools import compress
 import tqdm
 
 # pulls the last 5.5 days (by default) of minute-by-minute price data in terms of BTC (by default)
@@ -89,14 +90,20 @@ if __name__ == '__main__':
 		data = min_pull(name)
 		try:
 			with open(name + '.csv', 'r', newline='') as f:
+				i = 0
 				reader = csv.reader(f)
+				last_time = []
 				for row in reader:
-					last_time = row[0]
-			data = list(filter(lambda x: x[0] > last_time, data))
+					if i == 0:
+						truth_list = list(map(lambda x: not str(x) in list(row), data[0]))
+					data[i] = list(compress(data[i], truth_list))
+					data[i].extend(row)
+					i += 1
+					
 		except Exception as e:
-			print('Did not read from file.  Does it exist?')
+			print('Did not read from file.  Does it exist?', e)
 
 		with open(name + '.csv', 'w', newline='') as f:
 			writer = csv.writer(f)
 			writer.writerows(data)
-			print('Wrote data to file \n')
+			print('Wrote ' + str(len(data[0])) + ' lines of data to file \'' + name + '.csv\' \n')

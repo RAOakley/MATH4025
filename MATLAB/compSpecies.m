@@ -8,7 +8,8 @@ plot(smooth(firstBTC, smoothingFactor));
 title 'derivatives after smoothing'
 legend('derivative','unsmoothed price','smoothed price (used for derivative)');
 
-compEqn = 'a*x*(1-(x + b*y)/c)'
+% compEqn = 'a*x*(1-(x + b*y)/c)'
+compEqn = 'a*x-b*x*y'
 
 cf = fit([firstBTC, secondBTC],derivatives,compEqn)
 figure(1241234512);clf;
