@@ -1,5 +1,6 @@
 import twitter as twit
 import json
+import shutil
 
 def search(twitter, search_type, search_term):
 	# only returns a max of 100 tweets, anyways
@@ -31,6 +32,7 @@ if __name__ == '__main__':
 		for tp in types:
 			data = search(twitter, tp, name)
 			try:
+				shutil.copyfile(name + '.json', name + '_BACKUP.json')
 				with open(name + '.json', 'r', newline='') as f:
 					f_data = json.load(f)
 					# get the list of tweet ids already in the JSON
