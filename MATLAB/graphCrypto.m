@@ -1,23 +1,29 @@
-cryptoNames = {'STORJ','MAID','SC'}; %SC, BTC
+cryptoNames = {'STORJ','MAID','SC'};
 inUSD = false;
-%cryptoData = {};
+cryptoData = cryptoNames;
 
 BTCData = csvread('../BTC_daily.csv');
 dataLength = length(BTCData);
+
 %{
 firstCoin = csvread(['../', cryptoNames{1}, '_daily.csv']);
 secondCoin = csvread(['../', cryptoNames{2}, '_daily.csv']);
 thirdCoin = csvread(['../', cryptoNames{3}, '_daily.csv']);
 %}
-firstCoin = csvread(['../', cryptoNames{1}, '.csv']);
-secondCoin = csvread(['../', cryptoNames{2}, '.csv']);
-thirdCoin = csvread(['../', cryptoNames{3}, '.csv']);
+
+for i=1:length(cryptoNames)
+    cryptoData{i} = csvread(['../', cryptoNames{i}, '.csv']);
+end
+
+firstCoin = cryptoData{1};
+secondCoin = cryptoData{2};
+thirdCoin = cryptoData{3};
 
 figure(123234);clf;hold on; title 'Coin Prices'
 plot(firstCoin(1,:), firstCoin(2,:));
 plot(secondCoin(1,:), secondCoin(2,:));
 plot(thirdCoin(1,:), thirdCoin(2,:));
-legend(cryptoNames, 'Location', 'northwest');
+legend({'STORJ','MAID','SC'}, 'Location', 'northwest');
 
 
 for i = 2:length(secondCoin(2,:))

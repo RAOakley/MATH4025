@@ -4,6 +4,7 @@ import datetime as dt
 import csv
 from itertools import compress
 import tqdm
+import shutil
 
 # pulls the last 5.5 days (by default) of minute-by-minute price data in terms of BTC (by default)
 # the final data-point will be time-stamped to the closest minute of the request-time
@@ -90,9 +91,12 @@ if __name__ == '__main__':
 		data = min_pull(name)
 		try:
 			with open(name + '.csv', 'r', newline='') as f:
-				i = 0
+
+				shutil.copyfile(name + '.csv', name + '_BACKUP.csv')
+
 				reader = csv.reader(f)
-				last_time = []
+
+				i = 0
 				for row in reader:
 					if i == 0:
 						truth_list = list(map(lambda x: not str(x) in list(row), data[0]))
