@@ -2,9 +2,6 @@ cryptoNames = {'STORJ','MAID','SC'};
 inUSD = false;
 cryptoData = cryptoNames;
 
-BTCData = csvread('../BTC_daily.csv');
-dataLength = length(BTCData);
-
 %{
 firstCoin = csvread(['../', cryptoNames{1}, '_daily.csv']);
 secondCoin = csvread(['../', cryptoNames{2}, '_daily.csv']);

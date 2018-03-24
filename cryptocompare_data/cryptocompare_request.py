@@ -86,7 +86,7 @@ if __name__ == '__main__':
 	'''
 
 
-	names = ['ETH','XRP','BCH','LTC','EOS','ADA','NEO','XLM','BCD','VEN','IOT','XMR','TRX','DASH','XEM','ETC','QTUM','BNB','LSK','R','XRB','BTG','ICX','WTC','ZEC','SNT','HT','DGD','ZIL','WAVES','NAS','NAS','BTM','STRAT','ZRX','XVG','AE','DOCE','SC','IOST','LINK','REP','POWR','NCASH','STORJ','BAT','SALT','MTL','CVC','KNC','SRN','SUB','HSR','GNT','MANA','MDS','REQ','CND','ELF','THETA','EDO','AST','ABT','NEBL','GVT','SAN','NBT','ENJ','NULS','RUFF','RCN','SWFTC','DTA','VIBE','ITC','CMT','PRO','OCN','BCPT','INS','ADX','MTN','WINGS','VIB','GUP','SNC','NKC','OC','PAY','ETHOS','RDD','TNB','ONT','OMG','GAS','AION','APPC','MCO','QSP','ELA','MAID']
+	names = ['ETH','XRP','BCH','LTC','EOS','ADA','NEO','XLM','BCD','VEN','IOT','XMR','TRX','DASH','XEM','ETC','QTUM','BNB','LSK','MAID','SC','STORJ']
 	for name in names:
 		data = min_pull(name)
 		try:

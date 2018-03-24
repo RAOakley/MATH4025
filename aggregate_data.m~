@@ -1,0 +1,9 @@
+coin_types = {'ETH','XRP','BCH','LTC','EOS','ADA','NEO','XLM','BCD','VEN','IOT','XMR','TRX','DASH','XEM','ETC','QTUM','BNB','LSK','MAID','SC','STORJ'};
+json_types = {'_recent.json','_popular.json','_mixed.json'};
+
+for i = 1:length(coin_types)
+    for j = 1:length(json_types)
+        temp_file_identifier = fopen(['./twitter_data/',coin_types{i},json_types{j}],'r');
+        temp_text_data = fscanf(,'%s');
+    end
+end['./twitter_data/',coin_types{i},json_types{j}]
