@@ -13,10 +13,10 @@ for i = 1:length(coin_types)
                 'inputFormat','eee MMM d H:mm:ss xxxx yyyy',...
                 'TimeZone','UTC');
             temp_unixtime = posixtime(temp_datetime);
-            temp_followers = temp_status.user.followers;
+            temp_followers = temp_status.user.followers_count;
             
-            tweets{i}{j}[k,1] = temp_unixtime;
-            tweets{i}{j}[k,2] = temp_followers;            
+            %tweets{i}{j}[k,1] = temp_unixtime;
+            %tweets{i}{j}[k,2] = temp_followers;            
         end
     end
 end
