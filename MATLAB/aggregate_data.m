@@ -42,11 +42,15 @@ for i=1:length(coin_types)
     k = 1;
     search_type = 3;
     error_acc = 0;
+    error = [];
+    
+    temp_k = size(tweets{i}{search_type});
+    max_k = temp_k(1);
     for j = 1:length(price_data{i})
         temp_tweets = 0;
         temp_followers = 0;
         temp_weighted_sent = 0;
-        while(tweets{i}{search_type}{k,1} <= price_data{i}(1,j))
+        while(k <= max_k && tweets{i}{search_type}{k,1} <= price_data{i}(1,j))
             if(tweets{i}{search_type}{k,1} > price_data{i}(1,j) - 60)
                 temp_followers = temp_followers + tweets{i}{search_type}{k,2};
                 temp_tweets = temp_tweets + 1;
