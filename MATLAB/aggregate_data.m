@@ -2,6 +2,8 @@ coin_types = {'ETH','XRP','BCH','LTC','EOS','ADA','NEO','XLM','BCD','VEN','IOT',
 json_types = {'_recent.json','_popular.json','_mixed.json'};
 json_type_to_use = 3;
 
+% make sure to run the predict function over the JSONS first, so they have
+% a sentiment field
 % for i = 1:length(coin_types)
 %     for j = 1:length(json_types)
 %         temp_file_identifier = fopen(['../twitter_data/',coin_types{i},json_types{j}],'r');
@@ -20,20 +22,19 @@ json_type_to_use = 3;
 %             temp_unixtime = posixtime(temp_datetime);
 %             temp_followers = temp_status.user.followers_count;
 %             
-%             % Add sentiment analysis here
-%             temp_text = temp_status.text;
-%             temp_sentiment = 0;
+%             temp_sent = temp_status.sentiment;
 %             
 %             temp_id = temp_status.id_str;
 %             
 %             tweets{i}{j}{k,1} = temp_unixtime;
 %             tweets{i}{j}{k,2} = temp_followers;
-%             tweets{i}{j}{k,3} = temp_sentiment;
+%             tweets{i}{j}{k,3} = temp_sent;
 %             tweets{i}{j}{k,4} = temp_id;
 %         end
 %         tweets{i}{j} = sortrows(tweets{i}{j}, 1);
 %     end
 % end
+
 
 for i=1:length(coin_types)
     price_data{i} = csvread(['../cryptocompare_data/', coin_types{i}, '.csv']);
@@ -68,4 +69,4 @@ for i=1:length(coin_types)
 end
 
 XS = price_data{1}(3:end,:);
-YS = XS(2,:);
+YS = price_data{1}(2,:);

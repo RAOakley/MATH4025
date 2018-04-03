@@ -9,7 +9,8 @@ import os
 
 MAX_SEQUENCE_LENGTH = 1000
 MAX_NB_WORDS = 20000
-TRAIN_DATA_FILE = "Sentiment Analysis Dataset.csv"
+BASE_DIR = "../twitter-sentiment-analysis-master/"
+TRAIN_DATA_FILE = BASE_DIR + "Sentiment Analysis Dataset.csv"
 
 def main():
 	inpts = []
@@ -20,20 +21,20 @@ def main():
 		inpts.append(arg)
 
 	pred = predictor()
-	pprint(predictor.infer(tweets=inpts))
+	
+	return predictor.infer(tweets=inpts)
 
-	return
 
 class predictor(object):
 	def __init__(self):
 		self.tokenizer = Tokenizer(nb_words=MAX_NB_WORDS)
 		self.load_tokenizer_data()
 
-		self.model = load_model('model.h5')
-		self.model.load_weights('weights.h5')
+		self.model = load_model(BASE_DIR + 'model.h5')
+		self.model.load_weights(BASE_DIR + 'weights.h5')
 
 
-	def infer(tweets=[]):
+	def infer(self, tweets=[]):
 		os.environ['CUDA_VISIBLE_DEVICES'] = '1'  # str(random.randint(0, 15))
 
 		'''
@@ -83,3 +84,4 @@ class predictor(object):
 
 if __name__ == "__main__":
 	main()
+	# sys.stdout.write(main())
