@@ -20,10 +20,10 @@ trainFcn = 'trainbr';  % Bayesian Regularization backpropagation.
 % Create a Nonlinear Autoregressive Network with External Input
 inputDelays = 1:5;
 feedbackDelays = 1:5;
-hiddenLayerSize = 15;
+hiddenLayerSize = 3;
 net = narxnet(inputDelays,feedbackDelays,hiddenLayerSize,'open',trainFcn);
-net.layers{1}.transferFcn = 'logsig';
-net.layers{2}.transferFcn = 'purelin';
+% net.layers{1}.transferFcn = 'purelin';
+% net.layers{2}.transferFcn = 'purelin';
 
 % Choose Input and Feedback Pre/Post-Processing Functions
 % Settings for feedback input are automatically applied to feedback output

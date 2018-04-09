@@ -4,37 +4,38 @@ json_type_to_use = 3;
 
 % make sure to run the predict function over the JSONS first, so they have
 % a sentiment field
-% for i = 1:length(coin_types)
-%     for j = 1:length(json_types)
-%         temp_file_identifier = fopen(['../twitter_data/',coin_types{i},json_types{j}],'r');
-%         temp_text_data = fscanf(temp_file_identifier,'%c');
-%         temp_json = jsondecode(temp_text_data); %jsons{i}{j}
-%         for k = 1:length(temp_json.statuses)
-%             try
-%                 temp_status = temp_json.statuses{k};
-%             catch e
-%                 temp_status = temp_json.statuses(k);
-%             end
-%             
-%             temp_datetime = datetime(temp_status.created_at,...
-%                 'inputFormat','eee MMM d H:mm:ss xxxx yyyy',...
-%                 'TimeZone','UTC');
-%             temp_unixtime = posixtime(temp_datetime);
-%             temp_followers = temp_status.user.followers_count;
-%             
-%             temp_sent = temp_status.sentiment;
-%             
-%             temp_id = temp_status.id_str;
-%             
-%             tweets{i}{j}{k,1} = temp_unixtime;
-%             tweets{i}{j}{k,2} = temp_followers;
-%             tweets{i}{j}{k,3} = temp_sent;
-%             tweets{i}{j}{k,4} = temp_id;
-%         end
-%         tweets{i}{j} = sortrows(tweets{i}{j}, 1);
-%     end
-% end
+if true
+    for i = 1:length(coin_types)
+        for j = 1:length(json_types)
+            temp_file_identifier = fopen(['../twitter_data/',coin_types{i},json_types{j}],'r');
+            temp_text_data = fscanf(temp_file_identifier,'%c');
+            temp_json = jsondecode(temp_text_data); %jsons{i}{j}
+            for k = 1:length(temp_json.statuses)
+                try
+                    temp_status = temp_json.statuses{k};
+                catch e
+                    temp_status = temp_json.statuses(k);
+                end
 
+                temp_datetime = datetime(temp_status.created_at,...
+                    'inputFormat','eee MMM d H:mm:ss xxxx yyyy',...
+                    'TimeZone','UTC');
+                temp_unixtime = posixtime(temp_datetime);
+                temp_followers = temp_status.user.followers_count;
+
+                temp_sent = temp_status.sentiment;
+
+                temp_id = temp_status.id_str;
+
+                tweets{i}{j}{k,1} = temp_unixtime;
+                tweets{i}{j}{k,2} = temp_followers;
+                tweets{i}{j}{k,3} = temp_sent;
+                tweets{i}{j}{k,4} = temp_id;
+            end
+            tweets{i}{j} = sortrows(tweets{i}{j}, 1);
+        end
+    end
+end
 
 for i=1:length(coin_types)
     price_data{i} = csvread(['../cryptocompare_data/', coin_types{i}, '.csv']);
@@ -68,5 +69,12 @@ for i=1:length(coin_types)
     error(i) = error_acc;
 end
 
-XS = price_data{1}(3:end,:);
+XS = price_data{1}(3,:);
 YS = price_data{1}(2,:);
+testx = price_data{3}(3:7,:);
+testy = price_data{3}(2,:);
+
+% for i = 2:length(price_data{1}(2,:))
+%     YS(i) = sign(price_data{1}(2,i) - price_data{1}(2,i-1));
+% end
+% YS(1) = 0;
